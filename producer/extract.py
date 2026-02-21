@@ -12,7 +12,7 @@ def connect_to_api():
     		  "function":"TIME_SERIES_INTRADAY",
     		  "symbol":f"{stocks[stock]}",
     		  "outputsize":"compact",
-			  "interval": "5mins",
+			  "interval": "5min",
     		  "datatype":"json"}
 
     try:
@@ -38,7 +38,7 @@ def extract_json(response):
 
   for data in response:
    symbol = data['Meta Data']['2. Symbol']
-   for date_str, metrics in data['Time Series (5mins)'].items():
+   for date_str, metrics in data['Time Series (5min)'].items():
      record = {
        "symbol": symbol,
        "date":date_str,
