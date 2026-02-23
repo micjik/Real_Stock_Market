@@ -54,7 +54,7 @@ services:
     build:
       context: ./consumer              # Use same Apache Spark image for PySpark streaming
       dockerfile: Dockerfile
-    image: stream_consumer:v1
+    image: tractusx/kafka-consumer:0.1.0
     container_name: consumer          # Assign a name for the streaming job container
     depends_on:
       - spark-master
@@ -93,7 +93,7 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1 # Replication factor = 1 since single broker
       KAFKA_LOG_RETENTION_HOURS: 168            # Keep messages for 7 days
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0 # No delay before consumer group rebalance
-      CLUSTER_ID: "VuUIaLagTAaKjV36Tu1EYg"      # Unique cluster ID for KRaft mode 
+      CLUSTER_ID: "JougTGQWQw-FjmY4s-nqxQ"      # Unique cluster ID for KRaft mode 
       # generate cluster_id  docker: run --rm confluentinc/cp-kafka:7.4.10 kafka-storage random-uuid
 
     volumes:
