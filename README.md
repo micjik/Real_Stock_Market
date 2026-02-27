@@ -30,3 +30,4 @@ All components are containerized with Docker for easy deployment.
 ### Challenges
 - `Unable to retrieve data successfully from the API due to typing error`
 - `Docker hub used previously is no longer available`
+- `Connection from kafker to consumer keep failing with several error messages due to several typo error`

@@ -1,10 +1,10 @@
-from kafka import kafkaConsumer
+from kafka import KafkaConsumer
 import json
 import time
 
 # --- Configuration matching the producer ---
 
-consumer = kafkaConsumer(
+consumer = KafkaConsumer(
     'stock-analysis',
     bootstrap_servers = ['localhost:9094'],
     auto_offset_reset = 'earliest',
