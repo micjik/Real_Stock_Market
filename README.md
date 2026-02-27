@@ -50,3 +50,11 @@ All components are containerized with Docker for easy deployment.
 - `Once data is received in real time to kafka and it will be passed to spark where data are cleaned and transformed`
 - `it is then moved to our database which is the postgres`
 - `our power bi is connected to our postgres for reporting and visualizing which is used by data analyst or business stakeholder to make a business decision`
+
+
+### SERVICES
+- `API - RapidApi is used for this project to get Real time stock data`
+- `KAFKA` - `This is the nervous system and power house of our project that allow us to collect, store and process our streaming data from our API`
+- `SPARK - once any new data arrived in our kafka, it picks them up in real time, it automatically collects any new data from kafka and it clean and transformed our data into a structured one`
+- `POSTGRES - the structured data are moved to our database for onward use` 
+- `POWER BI - It is connected to our postgresql in order to get data in real time`
