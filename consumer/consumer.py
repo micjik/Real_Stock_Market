@@ -12,6 +12,15 @@ if not os.path.exists(checkpoint_dir):
     os.makedirs(checkpoint_dir)
 
 
+postgres_config = {
+    "url":"jdbc:postgresql://postgres:5432/stock_data",
+    "user":"admin",
+    "password":"admin",
+    "dbtable":"stocks",
+    "driver":"org.postgresql.Driver"
+}
+
+
 # The Schema/ Structure matching the new data coming from kafka
 kafka_data_schema = StructType([
     StructField("date", StringType()),
@@ -51,14 +60,27 @@ processed_df = parsed_df.select(
         
 )
 
-# Display the results to terminal (console output mode)
+def write_to_postgres(batch_df, batch_id):
+    """
+    writes a microbatch DataFrame to postgreSQL using JDBC IN "append" mode.
+    """
+    batch_df.write \
+    .format("jdbc") \
+    .mode("append") \
+    .options(**postgres_config) \
+    .save()
 
-query = processed_df.writeStream \
-.outputMode("append") \
-.format("console") \
-.option("truncate", "false") \
-.option("checkpointLocation", checkpoint_dir) \
+
+# ---- Stream to PostgreSQL using foreachBatch
+
+query = (
+processed_df.writeStream 
+.foreachBatch(write_to_postgres) #use foreachBatch for JDBC sinks
+.option("checkpointLocation", checkpoint_dir) #directory where spark will store its
+.outputMode('append') # or 'append', depending on your use case and table schema
 .start()
+)
+
 
 
 #wait for the termination of the query (manually)
