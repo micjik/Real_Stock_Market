@@ -58,3 +58,7 @@ All components are containerized with Docker for easy deployment.
 - `SPARK - once any new data arrived in our kafka, it picks them up in real time, it automatically collects any new data from kafka and it clean and transformed our data into a structured one`
 - `POSTGRES - the structured data are moved to our database for onward use` 
 - `POWER BI - It is connected to our postgresql in order to get data in real time`
+
+
+### Other Developers
+`for other developers to access this project run pip install -r requirement.txt`
